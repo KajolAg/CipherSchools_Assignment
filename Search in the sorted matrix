@@ -1,0 +1,39 @@
+import java.lang.*;
+import java.io.*;
+class Mat
+ {
+	public static void main (String[] args)
+	 {
+                 Scanner in = new Scanner(System.in);
+                 int a = in.nextInt();
+                 while(a-- > 0){
+                     Boolean b = false;
+                     int m = in.nextInt();
+                     int n = in.nextInt();
+                     int[][] arr = new int[m][n];
+                     for(int i = 0; i < m; i++){
+                         for(int j = 0; j < n; j++){
+                             arr[i][j] = in.nextInt();
+                         }
+                     }
+                     int k = in.nextInt();
+                     for(int i = 0; i < m; i++){
+                         if(arr[i][n - 1] >= k){
+                             for(int j = 0; j < n; j++){
+                                 if(arr[i][j] == k){
+                                     b = true;
+                                     break;
+                                 }
+                             }
+                         }
+                     }
+                     if(b){
+                         System.out.println("1");
+                     }
+                     else{
+                     System.out.println("0");
+                     }
+                 }
+                 
+	 }
+}
