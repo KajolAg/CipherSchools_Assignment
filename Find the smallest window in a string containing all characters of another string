@@ -1,0 +1,61 @@
+class solve
+{
+    public static String smallestWindow(String s, String t){
+        
+     if(s.length()<t.length())
+            return "-1";
+        
+        HashMap<Character,Integer> reqChars = new HashMap<Character,Integer>();
+        
+        for(int i=0;i<t.length();i++)
+            if(reqChars.containsKey(t.charAt(i)))
+                reqChars.put(t.charAt(i),reqChars.get(t.charAt(i))+1);
+            else
+                reqChars.put(t.charAt(i),1);
+        
+        HashMap<Character,Integer> charsWindow = new HashMap<Character,Integer>();
+        int left=0;
+        int right=0;
+        String window= new String("");
+        int minWindowLength=Integer.MAX_VALUE;
+        int charFreqToMatch=reqChars.size();
+        int count=0;
+        
+        
+        
+        while(right<s.length()){
+            char c=s.charAt(right);
+            int value =charsWindow.getOrDefault(c,0);
+            charsWindow.put(c,value+1);
+            
+            if(reqChars.containsKey(c))
+                if(reqChars.get(c)==charsWindow.get(c))
+                    count++;
+                    
+            while(charFreqToMatch==count&&left<=right){
+                char cl=s.charAt(left);
+                int currWindowLength= right-left+1;
+                
+                if(currWindowLength<minWindowLength){
+                    minWindowLength=currWindowLength;
+                    window=s.substring(left,right+1);
+                }
+                
+                charsWindow.put(cl,charsWindow.get(cl)-1);
+                
+                if(reqChars.containsKey(cl))
+                    if(reqChars.get(cl)>charsWindow.get(cl))
+                        count--;
+                left++;
+            }
+                    
+            right++;
+            
+        }
+        
+        return minWindowLength==Integer.MAX_VALUE?"-1":window;
+        
+    }
+    
+   
+}
