@@ -1,0 +1,75 @@
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class Driverclass
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        
+        while(t-- > 0)
+        {
+            int n1 = sc.nextInt();
+            int m1 = sc.nextInt();
+            
+            int arr1[][] = new int[n1][m1];
+            
+            for(int i = 0; i < n1; i++)
+            {
+                for(int j = 0; j < m1; j++)
+                 arr1[i][j] = sc.nextInt();
+            }
+           
+            new Traverse().spirallyTraverse(n1, m1, arr1);
+            
+            System.out.println();
+        }
+    }
+}
+
+}
+
+class Traverse
+{
+    
+    static void spirallyTraverse(int m, int n, int arr1[][])
+    {
+       
+       int ctr = 0;
+	int index_1 = 0, index_2 = 1, index_3 = n - 2, index_4 = m - 2;
+	while (ctr <= (m * n)) {
+		
+		for (int col = index_1; col < n - index_1; col++) {
+			System.out.print(arr1[index_1][col] + " ");
+			ctr++;
+		}
+		if (ctr >= (m * n))
+			return;
+		
+		for (int row = index_2; row < m - index_1; row++) {
+			System.out.print(arr1[row][n - 1 - index_1] + " ");
+			ctr++;
+		}
+		if (ctr >= (m * n))
+			return;
+		
+		for (int col = index_3; col >= 0 + index_1; col--) {
+			System.out.print(arr1[m - 1 - index_1][col] + " ");
+			ctr++;
+		}
+		if (ctr >= (m * n))
+			return;
+		
+		for (int row = index_4; row >= 0 + index_1 + 1; row--) {
+			System.out.print(arr1[row][index_1] + " ");
+			ctr++;
+		}
+		index_1++;
+		index_2++;
+		index_3--;
+		index_4--;
+	}
+    }
+}
