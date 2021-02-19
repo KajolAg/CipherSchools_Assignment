@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <stack>
+using namespace std;
+
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+
+
+
+bool isPalindrome(Node *head);
+
+int main()
+{
+  int T,i,n,l,firstdata;
+    cin>>T;
+    while(T--)
+    {
+        
+        struct Node *head = NULL,  *tail = NULL;
+        cin>>n;
+        // taking first data of LL
+        cin>>firstdata;
+        head = new Node(firstdata);
+        tail = head;
+        // taking remaining data of LL
+        for(i=1;i<n;i++)
+        {
+            cin>>l;
+            tail->next = new Node(l);
+            tail = tail->next;
+        }
+   	cout<<isPalindrome(head)<<endl;
+    }
+    return 0;
+}
+
+
+bool isPalindrome(Node *head)
+{
+
+string s="";
+int i;
+Node* t;
+t=head;
+while(t!=NULL)
+{
+int a=t->data;
+string b = to_string(a);
+s=s+b;
+t=t->next;
+}
+if (s.size()%2==0)
+{
+int c=0;
+for(i=0;i<(s.size())/2;i++)
+{
+if (s[i]==s[s.size()-1-i])
+{
+c++;
+}
+}
+if (c==s.size()/2){return 1;}
+else{return 0;}
+}
+else
+{
+int c=0;
+for(i=0;i<(s.size()-1)/2;i++)
+{
+if (s[i]==s[s.size()-1-i])
+{
+c++;
+}
+}
+if (c==(s.size()-1)/2){return 1;}
+else{return 0;}
+}
