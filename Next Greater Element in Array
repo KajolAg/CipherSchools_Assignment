@@ -1,0 +1,50 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class GFG {
+    
+	public static void main (String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t = Integer.parseInt(br.readLine().trim());
+		while(t-->0){
+		    int n = Integer.parseInt(br.readLine().trim());
+		    String inputLine[] = br.readLine().trim().split(" ");
+		    long[] arr = new long[n];
+		    for(int i=0; i<n; i++)arr[i]=Long.parseLong(inputLine[i]);
+		    new solve().printNGE(arr, n);
+		    System.out.println();
+		}
+	}
+}
+
+
+
+
+class solve{
+    public static void printNGE(long[] arr, int n) { 
+        Stack<Long>s=new Stack<>();
+        Stack<Long>t=new Stack<>();
+        t.push((long)-1);
+        s.push(arr[n-1]);
+        for(int i=n-2;i>-1;i--){
+            if(arr[i]<s.peek()){
+                t.push(s.peek());
+                s.push(arr[i]);
+            }
+            
+            else{
+                while(!s.empty() && s.peek()<arr[i]){
+                    s.pop();
+                }
+                if(s.empty())
+                    t.push((long)-1);
+                else
+                    t.push(s.peek());
+                s.push(arr[i]);
+            }
+        }
+        while(!t.empty())
+        System.out.print(t.pop()+" ");
+    } 
+}
